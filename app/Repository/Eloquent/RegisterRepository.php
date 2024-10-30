@@ -14,5 +14,12 @@ class RegisterRepository extends BaseRepository implements RegisterRepositoryInt
         parent::__construct($model);
     }
 
-
+    public function findByEmail(string $email, array $columns = ['*'], $relations = []): ?Model
+    {
+        return $this->model
+            ->select($columns)
+            ->with($relations)
+            ->where('email', $email)
+            ->first();
+    }
 }
