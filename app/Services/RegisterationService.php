@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\UnauthorizedException;
 use App\Exceptions\UserAlreadyExistsException;
+use App\Helpers\ResponseHelper;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repository\Eloquent\RegisterRepository;
@@ -42,15 +44,7 @@ class RegisterationService
 
         $token = $this->generateJWTToken($user);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
+        return ResponseHelper::createRegistrationResponse($user, $token);
     }
 
     public function loginService($request)
@@ -59,20 +53,11 @@ class RegisterationService
 
         $token = Auth::attempt($credentials);
         if (!$token) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-            ], 401);
+            throw new UnauthorizedException();
         }
 
         $user = Auth::user();
-        return response()->json([
-            'status' => 'success',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
+
+        return ResponseHelper::createLoggingResponse($user, $token);
     }
 }

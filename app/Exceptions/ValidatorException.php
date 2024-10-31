@@ -6,7 +6,6 @@ use Illuminate\Http\Response;
 
 class ValidatorException extends ApplicationException
 {
-
     public function status(): int
     {
         return Response::HTTP_UNPROCESSABLE_ENTITY;

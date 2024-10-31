@@ -22,7 +22,7 @@ class RegisterController extends Controller
         $this->registerationService = $registerationService;
     }
 
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request)
     {
         return $this->registerationService->registerService($request);
     }
