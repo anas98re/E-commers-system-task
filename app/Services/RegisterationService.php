@@ -51,8 +51,7 @@ class RegisterationService
     {
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
-        if (!$token) {
+        if (!$token = Auth::attempt($credentials)) {
             throw new UnauthorizedException();
         }
 

@@ -5,47 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductResource;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private $ProductService;
+
+    public function __construct(ProductService $ProductService)
+    {
+        $this->ProductService = $ProductService;
+    }
+
     public function index()
     {
-        //
+        return $this->ProductService->getAllProductsService();
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreProductRequest $request)
     {
-        //
+        return $this->ProductService->addProductService($request);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        return $this->ProductService->ShowProductService($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, $id)
     {
-        //
+        return $this->ProductService->updateProductService($request, $id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        return $this->ProductService->deleteProductService($id);
     }
 }

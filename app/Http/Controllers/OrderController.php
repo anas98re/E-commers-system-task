@@ -5,62 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private $OrderService;
+
+    public function __construct(OrderService $OrderService)
+    {
+        $this->OrderService = $OrderService;
+    }
+
     public function index()
     {
-        //
+        return $this->OrderService->getAllOrdersService();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreOrderRequest $request)
     {
-        //
+        return $this->OrderService->addOrderService($request);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        return $this->OrderService->showOrderService($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
+    public function update(UpdateOrderRequest $request, $id)
     {
-        //
+        return $this->OrderService->updateOrderService($request, $id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        return $this->OrderService->deleteOrderService($id);
     }
 }

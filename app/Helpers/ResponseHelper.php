@@ -28,4 +28,39 @@ class ResponseHelper
             ]
         ];
     }
+
+    public static function createResponse($data)
+    {
+        return [
+            'status' => 'success',
+            'message' => 'created successfully',
+            'data' => $data,
+        ];
+    }
+
+    public static function showResponse($data)
+    {
+        return [
+            'status' => 'success',
+            'message' => 'showed successfully',
+            'data' => $data,
+        ];
+    }
+
+    public static function updateResponse($data)
+    {
+        return [
+            'status' => 'success',
+            'message' => 'update successfully',
+            'data' => $data,
+        ];
+    }
+
+    public static function deleteResponse()
+    {
+        return [
+            'status' => 'success',
+            'message' => 'delete successfully',
+        ];
+    }
 }

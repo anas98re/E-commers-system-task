@@ -30,9 +30,9 @@ class BaseRepository implements EloquentRepositoryInterface
     }
 
 
-    public function delete($column, $value)
+    public function delete($id)
     {
-        return $this->model->where($column, $value)->delete();
+        return $this->model->find($id)->delete();
     }
 
     public function where($column, $value)
