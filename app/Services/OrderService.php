@@ -86,6 +86,7 @@ class OrderService
                 throw new UnauthorizedException();
             }
 
+            // Detach existing products and attach new products to the order
             $order->products()->detach();
 
             $products = $request->input('products', []);
@@ -112,6 +113,7 @@ class OrderService
             throw new NotFoundException();
         }
 
+        // Detach all products associated with the order and delete the order
         $order->products()->detach();
         $order->delete();
 
