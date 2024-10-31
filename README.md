@@ -11,3 +11,8 @@ php artisan make:model Order -m
 - php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 - php artisan jwt:secret
 
+- php artisan make:model order_product
+- php artisan make:factory OrderProductFactory
+- php artisan make:seeder OrderProductTableSeed
+- php artisan db:seed --class=OrdersTableSeeder
+- php artisan db:seed --class=OrderSeeder  
