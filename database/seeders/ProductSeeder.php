@@ -10,8 +10,8 @@ class ProductSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        //
+        \App\Models\Product::factory(10)->create();
     }
 }
